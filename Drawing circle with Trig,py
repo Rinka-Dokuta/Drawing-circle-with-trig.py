@@ -1,0 +1,36 @@
+import pygame 
+import math
+pygame.init()
+pygame.display.set_caption("Graphical for loops") 
+screen = pygame.display.set_mode((800, 800))
+
+
+gameover = False #variable to run our game loop
+angle = 0
+
+
+while not gameover:   #Game loop----------------------------------------------------------------
+    
+    angle += .0001#The angle used in the radians equation
+    if angle > 360:
+        angle = 0
+        
+        
+    radians = angle*180/3.14
+    
+    xpos = 200*math.cos(radians*30)+400#how tall the pattern is/X postion on screen
+    ypos = 200*math.sin(radians*50)+400#how wide the pattern is/Y postion on screen
+    
+    # multiplying front of the trig functions by a constant makes the circle bigger
+    # adding something to the end changes the position of the circle
+    if radians > 125: #If radiands count goes over 125 it will rest back to 0 making a second pattern
+        radians = 0
+        angle = 0
+    print(radians)
+    
+    pygame.draw.circle(screen, (radians/3+100, radians, radians+100), (xpos, ypos), radians, 1)
+    pygame.draw.circle(screen, (0,0,0), (xpos, ypos), radians-1)
+    
+    pygame.display.flip()
+
+pygame.quit()
